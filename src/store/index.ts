@@ -1,27 +1,24 @@
 import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { connectRouter } from 'connected-react-router';
 import {createBrowserHistory, History} from 'history';
-import availabilityReducer from './modules/availabilityDate';
+import availabilityDateReducer from './modules/availabilityDate';
+import availabilityTimeReducer from './modules/availabilityTime';
 
 const history = createBrowserHistory();
 
 const appReducer = combineReducers({
-    availability: availabilityReducer
+    availabilityDate: availabilityDateReducer,
+    availabilityTime: availabilityTimeReducer,
 });
 
 const rootReducer = (history: History) => combineReducers({
     app: appReducer,
-    router: connectRouter(history),
+    router: connectRouter(history)
 });
-
-const initialState = {
-    app: {}
-};
 
 const store = configureStore({
     reducer: rootReducer(history),
     middleware: getDefaultMiddleware(),
-    preloadedState: initialState,
 });
 
 export type AppState = ReturnType<typeof appReducer>;

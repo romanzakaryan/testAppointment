@@ -1,34 +1,14 @@
+import { availableDate } from '../store/modules/availabilityDate';
+import { availableTimes } from '../store/modules/availabilityTime';
 import { serviceID, locationID, resourceID } from './../constants/appointmentInfo';
 const oauthToken = JSON.parse(localStorage.getItem('profile') || '{}').access_token;
 const apiBaseUrl = 'https://sandbox-api.onsched.com';
 const clientTmz = -new Date().getTimezoneOffset();
 
-
-export const getSericesAPI = async () => {
-    try {
-        const response = await fetch(`${apiBaseUrl}/consumer/v1/services`, {
-            headers: {
-                'Authorization': `Bearer ${oauthToken}`,
-                'Content-Type': 'application/json'
-            }
-        })
-
-        const data = await response.json();
-
-        if(!response.ok){
-            throw new Error(data.message || 'Smth goes wrong');
-        }
-
-        return data
-    } catch (e) {
-        throw e;
-    }
-}
-
-export const getAvailabilityDaysAPI = async (firstdate: string, lastDate: string) => {
+export const getAvailabilityDaysAPI = async (firstdate: string, lastDate: string): Promise<availableDate | never> => {
     try {
         const response = await fetch(
-            `${apiBaseUrl}/consumer/v1/availability/${serviceID}/${firstdate}/${lastDate}/days?locationId=${locationID}&resourceId=${resourceID}&tzOffset=${clientTmz}&firstDayAvailable=true`,
+            `${apiBaseUrl}/consumer/v1/availability/${serviceID}/${firstdate}/${lastDate}/days?locationId=${locationID}&resourceId=${resourceID}&tzOffset=${clientTmz}`,
         {
             headers: {
                 'Authorization': `Bearer ${oauthToken}`,
@@ -42,16 +22,18 @@ export const getAvailabilityDaysAPI = async (firstdate: string, lastDate: string
             throw new Error(data.message || 'Smth goes wrong');
         }
 
+        console.log('data', data);
+
         return data
     } catch (e) {
         throw e;
     }
 }
 
-export const getAvailabilityTimesAPI = async (firstdate: string, lastDate: string) => {
+export const getAvailabilityTimesAPI = async (firstdate: string): Promise<availableTimes | never> => {
     try {
         const response = await fetch(
-            `${apiBaseUrl}/consumer/v1/availability/${serviceID}/${firstdate}/${lastDate}/times?locationId=${locationID}&resourceId=${resourceID}&tzOffset=${clientTmz}&firstDayAvailable=true`,
+            `${apiBaseUrl}/consumer/v1/availability/${serviceID}/${firstdate}/${firstdate}/times?locationId=${locationID}&resourceId=${resourceID}&tzOffset=${clientTmz}`,
         {
             headers: {
                 'Authorization': `Bearer ${oauthToken}`,
@@ -64,6 +46,7 @@ export const getAvailabilityTimesAPI = async (firstdate: string, lastDate: strin
         if(!response.ok){
             throw new Error(data.message || 'Smth goes wrong');
         }
+        console.log(data);
 
         return data
     } catch (e) {
@@ -71,7 +54,7 @@ export const getAvailabilityTimesAPI = async (firstdate: string, lastDate: strin
     }
 }
 
-export const getToken = async (clientId: string) => {
+export const getToken = async (clientId: string): Promise<string | never> => {
     try {
         const url = "https://sandbox-js.onsched.com/auth/initialize";
         const scope = "OnSchedApi";

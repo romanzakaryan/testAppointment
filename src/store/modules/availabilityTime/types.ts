@@ -1,10 +1,10 @@
 export type availabilityTimesState = {
-    availableTimesData: availabilityTimes | {},
+    availableTimesData: availableTimes | {},
     isLoading: boolean,
     isLoaded: boolean
 }
 
-export type availabilityTimes = {
+export type availableTimes = {
     url: string,
     object: string,
     businessName: string,
@@ -19,10 +19,10 @@ export type availabilityTimes = {
     tzRequested: number,
     firstAvailableDate: string,
     availableDays: [],
-    availableTimes: availabilityTime[]
+    availableTimes: availableTime[]
 }
 
-export type availabilityTime = {
+export type availableTime = {
     startDateTime: string,
     endDateTime: string,
     date: string,
@@ -35,9 +35,4 @@ export type availabilityTime = {
     resourceIds: null,
     travelTimeMins: number,
     travelAppointmentId: string
-}
-
-export type availabilityAttribute = {
-    firstDate: string,
-    lastDate: string,
 }

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAvailabilityDays } from './operations';
-import { availableDateState } from './types';
+import { availableDate, availableDateState } from './types';
 
 export const initialState: availableDateState = {
     availableData: {},
@@ -14,11 +14,9 @@ export const availabilitySlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getAvailabilityDays.pending, (state) => {
-            state.availableData = {};
             state.isLoading = true;
-            state.isLoaded = false;
         });
-        builder.addCase(getAvailabilityDays.fulfilled, (state, action: PayloadAction<availableDateState>) => (
+        builder.addCase(getAvailabilityDays.fulfilled, (state, action: PayloadAction<availableDate>) => (
             {
                 ...state,
                 availableData: {

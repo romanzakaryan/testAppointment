@@ -1,13 +1,13 @@
 import { RootState } from './../../index';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { availabilityAttribute, availabilityTimesState } from './types';
+import { availableTimes } from './types';
 import { getAvailabilityTimesAPI } from '../../../api'; 
 
-export const getAvailabilityTimes = createAsyncThunk<availabilityTimesState, availabilityAttribute, { state: RootState }>(
+export const getAvailabilityTimes = createAsyncThunk<availableTimes, string, { state: RootState }>(
     'availability/getAvailabilityTime',
-    async ({firstDate, lastDate}, { getState }) => {
+    async (firstDate, { getState }) => {
         const state = getState();
-        const response = await getAvailabilityTimesAPI(firstDate, lastDate);
+        const response = await getAvailabilityTimesAPI(firstDate);
 
         if (!response) {
             throw new Error();

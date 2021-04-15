@@ -1,0 +1,41 @@
+.container {
+    flex-grow: 1;
+    margin-top: 20px;
+    margin-left: 20px;
+    .containerTime {
+        display: flex;
+        flex-wrap: wrap;
+    
+        .timeButton {
+            flex: 0 1 100px;
+            margin: 5px;
+            border: 2px solid #3f51b5;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #3f51b5;
+            background: white;
+            &:hover {
+                color: white;
+                background: #3f51b5;
+            }
+        }
+
+        .noAvailableTime {
+            text-align: center;
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 630px) {
+    .container {
+        margin-top: 0;
+        margin-left: 0;
+
+        .containerTime {
+            justify-content: center;
+        }
+    }
+}

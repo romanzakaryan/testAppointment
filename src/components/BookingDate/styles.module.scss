@@ -1,15 +1,11 @@
 .container {
     display: flex;
-    padding: 20px;
-    justify-content: space-between;
-    border: 3px solid #3f51b5;
-    border-radius: 5px;
+    flex-direction: row;
+    flex: 1 0 100%;
+}
 
-    .containerDate {
-        // display: flex;
-    }
-    
-    .containerTime {
-        // display: flex;
+@media (max-width: 630px) {
+    .container {
+        flex-direction: column;
     }
 }

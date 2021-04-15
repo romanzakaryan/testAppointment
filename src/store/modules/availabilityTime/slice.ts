@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAvailabilityTimes } from './operations';
-import { availabilityTimesState } from './types';
+import { availabilityTimesState, availableTimes } from './types';
 
 export const initialState: availabilityTimesState = {
     availableTimesData: {},
@@ -18,7 +18,7 @@ export const availabilityTimeSlice = createSlice({
             state.isLoading = true;
             state.isLoaded = false;
         });
-        builder.addCase(getAvailabilityTimes.fulfilled, (state, action: PayloadAction<availabilityTimesState>) => (
+        builder.addCase(getAvailabilityTimes.fulfilled, (state, action: PayloadAction<availableTimes>) => (
             {
                 ...state,
                 availableTimesData: {

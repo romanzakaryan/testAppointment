@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { AppointmentPage } from './pages/AppointmentPage/AppointmentPage';
+import { AppointmentPage } from './pages/appointmentPage';
 import { getToken } from './api/api';
 import './App.css';
 

@@ -9,7 +9,7 @@ export type availableDays = {
     bookingCount: number
 }
 
-export type availableData = {
+export type availableDate = {
     url: string,
     object: string,
     businessName: string,
@@ -32,7 +32,7 @@ export type availableData = {
 }
 
 export type availableDateState = {
-    availableData: availableData | {},
+    availableData: availableDate | {},
     isLoading: boolean,
     isLoaded: boolean
 }
