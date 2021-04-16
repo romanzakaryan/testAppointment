@@ -3,7 +3,7 @@ import { getAvailabilityDays } from './operations';
 import { availableDate, availableDateState } from './types';
 
 export const initialState: availableDateState = {
-    availableData: {},
+    availableData: {} as availableDate,
     isLoading: false,
     isLoaded: false
 };
@@ -27,7 +27,7 @@ export const availabilitySlice = createSlice({
             }
         ));
         builder.addCase(getAvailabilityDays.rejected, (state) => {
-            state.availableData = {};
+            state.availableData = {} as availableDate;
             state.isLoading = false;
             state.isLoaded = true;
         });

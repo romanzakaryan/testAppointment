@@ -6,6 +6,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin: 0;
+  box-sizing: border-box;
+}
+
+p, span, h1, h2, h3, h4 {
+  margin: 0;
 }
 
 code {

@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
-import DateFnsUtils from '@date-io/date-fns';
-import { useDispatch, useSelector } from 'react-redux';
-import { availableDate, getAvailabilityDays } from '../../store/modules/availabilityDate';
+import { getAvailabilityDays } from '../../store/modules/availabilityDate';
 import { changeDateFormat, monthLastDay } from '../../utils/date';
 import { RootState } from '../../store';
 import { getAvailabilityTimes } from '../../store/modules/availabilityTime';
+import { getWeekDayText } from '../../utils/date';
 
 import styles from './styles.module.scss';
 
@@ -17,10 +18,10 @@ export const AppointmentDatePicker = () => {
     }, [dispatch]);
 
     const [selectedDate, setSelectedDate] = React.useState(new Date());
-    const isDaysDataLoading = useSelector((state: RootState) => (state.app.availabilityDate.isLoading));
-    const availableDays = useSelector((state: RootState) => (state.app.availabilityDate.availableData as availableDate).availableDays);
+    const {isLoading} = useSelector((state: RootState) => (state.app.availabilityDate));
+    const {resourceName, availableDays, serviceName} = useSelector((state: RootState) => state.app.availabilityDate.availableData);
     const disableDays = (date: MaterialUiPickersDate) => {
-        if(isDaysDataLoading) {
+        if(isLoading) {
             return true;
         }
         const disabledDaysArr = availableDays.filter(day => !day.available && day.date === changeDateFormat(date as Date));
@@ -45,8 +46,24 @@ export const AppointmentDatePicker = () => {
         getAvailableDate(firstDate, lastDate);
     };
 
+
+    const datePickerHeader = (
+        <div className={styles.headerContainer}>
+            <div className={styles.dateInfo}>
+                <p className={styles.choosedDay}>{getWeekDayText(selectedDate).slice(0,3)}</p>
+                <span className={styles.choosedDate}>{new Date(selectedDate).getDate()}</span>
+            </div>
+            <div className={styles.appointmentInfo}>
+                <h4>Select a Date & Time</h4>
+                <p>{serviceName}</p>
+                <p>{resourceName}</p>
+            </div>
+        </div>
+    );
+
     return (
         <div className={styles.containerDate}>
+            {datePickerHeader}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DatePicker
                     value={selectedDate}

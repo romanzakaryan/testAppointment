@@ -32,7 +32,7 @@ export type availableDate = {
 }
 
 export type availableDateState = {
-    availableData: availableDate | {},
+    availableData: availableDate,
     isLoading: boolean,
     isLoaded: boolean
 }

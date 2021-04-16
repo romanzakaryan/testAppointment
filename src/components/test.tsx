@@ -8,8 +8,6 @@ export const TestOnSchedJs = () => {
         const availabilityParams = { locationId: '83a4fea3-e69f-448b-a96e-1ff394b1f6e3', serviceId: 119708, resourceId: 98865 };
         var availabilityOptions = {};
         var availability = elements.create("availability", availabilityParams, availabilityOptions);
-        console.log('elements', elements);
-        console.log('availability', availability);
         availability.mount("availability");
     }, [])
 

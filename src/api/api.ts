@@ -22,8 +22,6 @@ export const getAvailabilityDaysAPI = async (firstdate: string, lastDate: string
             throw new Error(data.message || 'Smth goes wrong');
         }
 
-        console.log('data', data);
-
         return data
     } catch (e) {
         throw e;
@@ -46,7 +44,6 @@ export const getAvailabilityTimesAPI = async (firstdate: string): Promise<availa
         if(!response.ok){
             throw new Error(data.message || 'Smth goes wrong');
         }
-        console.log(data);
 
         return data
     } catch (e) {

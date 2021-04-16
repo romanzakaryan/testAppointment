@@ -5,8 +5,7 @@ import { getAvailabilityTimesAPI } from '../../../api';
 
 export const getAvailabilityTimes = createAsyncThunk<availableTimes, string, { state: RootState }>(
     'availability/getAvailabilityTime',
-    async (firstDate, { getState }) => {
-        const state = getState();
+    async (firstDate) => {
         const response = await getAvailabilityTimesAPI(firstDate);
 
         if (!response) {

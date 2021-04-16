@@ -12,3 +12,10 @@ export const monthLastDay = (date: Date) => {
 
     return changeDateFormat(new Date(year, month +1, 0))
 }
+
+export const getWeekDayText = (day: Date) => {
+    const dayNum = day.getDay();
+    const weekDaysArr = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+    return weekDaysArr[dayNum]
+} 
