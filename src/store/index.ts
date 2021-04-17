@@ -3,12 +3,14 @@ import { connectRouter } from 'connected-react-router';
 import {createBrowserHistory, History} from 'history';
 import availabilityDateReducer from './modules/availabilityDate';
 import availabilityTimeReducer from './modules/availabilityTime';
+import appointmentFormReducer from './modules/appointmentForm';
 
 const history = createBrowserHistory();
 
 const appReducer = combineReducers({
     availabilityDate: availabilityDateReducer,
     availabilityTime: availabilityTimeReducer,
+    appointmentForm:  appointmentFormReducer,
 });
 
 const rootReducer = (history: History) => combineReducers({

@@ -1,5 +1,5 @@
 export type availabilityTimesState = {
-    availableTimesData: availableTimes | {},
+    availableTimesData: availableTimes,
     isLoading: boolean,
     isLoaded: boolean
 }

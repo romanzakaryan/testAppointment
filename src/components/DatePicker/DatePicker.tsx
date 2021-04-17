@@ -24,15 +24,15 @@ export const AppointmentDatePicker = () => {
         if(isLoading) {
             return true;
         }
-        const disabledDaysArr = availableDays.filter(day => !day.available && day.date === changeDateFormat(date as Date));
+        const disabledDaysArr = availableDays?.filter(day => !day.available && day.date === changeDateFormat(date as Date));
 
-        return !!disabledDaysArr.length;
+        return !!disabledDaysArr?.length;
     }
     const handleDateChange = (date: MaterialUiPickersDate) => {
         setSelectedDate(date as Date);
     }
-    const getAvailableTime = useCallback((firstDate) => {
-        dispatch(getAvailabilityTimes(firstDate));
+    const getAvailableTime = useCallback((selectedDate) => {
+        dispatch(getAvailabilityTimes(selectedDate));
     }, [dispatch]);
 
     useEffect(() => {

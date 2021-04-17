@@ -3,7 +3,7 @@ import { getAvailabilityTimes } from './operations';
 import { availabilityTimesState, availableTimes } from './types';
 
 export const initialState: availabilityTimesState = {
-    availableTimesData: {},
+    availableTimesData: {} as availableTimes,
     isLoading: false,
     isLoaded: false
 };
@@ -14,7 +14,7 @@ export const availabilityTimeSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getAvailabilityTimes.pending, (state) => {
-            state.availableTimesData = {};
+            state.availableTimesData = {} as availableTimes;
             state.isLoading = true;
             state.isLoaded = false;
         });
@@ -29,7 +29,7 @@ export const availabilityTimeSlice = createSlice({
             }
         ));
         builder.addCase(getAvailabilityTimes.rejected, (state) => {
-            state.availableTimesData = {};
+            state.availableTimesData = {} as availableTimes;
             state.isLoading = false;
             state.isLoaded = true;
         });

@@ -1,3 +1,4 @@
+import { postAppointmentData } from '../store/modules/appointmentForm';
 import { availableDate } from '../store/modules/availabilityDate';
 import { availableTimes } from '../store/modules/availabilityTime';
 import { serviceID, locationID, resourceID } from './../constants/appointmentInfo';
@@ -38,6 +39,57 @@ export const getAvailabilityTimesAPI = async (firstdate: string): Promise<availa
                 'Content-Type': 'application/json'
             }
         });
+
+        const data = await response.json();
+
+        if(!response.ok){
+            throw new Error(data.message || 'Smth goes wrong');
+        }
+
+        return data
+    } catch (e) {
+        throw e;
+    }
+}
+
+export const postAppointmentAPI = async (payload: postAppointmentData): Promise<string | never> => {
+    try {
+        const response = await fetch(
+            `${apiBaseUrl}/consumer/v1/appointments`,
+            {
+                method: 'POST',
+                body: JSON.stringify(payload),
+                headers: {
+                    'Authorization': `Bearer ${oauthToken}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if(!response.ok){
+            throw new Error(data.message || 'Smth goes wrong');
+        }
+
+        return data
+    } catch (e) {
+        throw e;
+    }
+}
+
+export const deleteAppointmentAPI = async (id: string): Promise<string | never> => {
+    try {
+        const response = await fetch(
+            `${apiBaseUrl}/consumer/v1/appointments/${id}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${oauthToken}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
 
         const data = await response.json();
 

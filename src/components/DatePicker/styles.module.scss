@@ -1,5 +1,5 @@
 .containerDate {
-    align-self: center;
+    align-self: flex-start;
 
     .headerContainer {
         display: flex;
@@ -7,6 +7,7 @@
 
         .dateInfo {
             margin-right: 20px;
+            width: 40px;
         }
 
         .choosedDay {
@@ -21,5 +22,11 @@
             height: 30px;
             padding: 10px;
         }
+    }
+}
+
+@media (max-width: 630px) {
+    .containerDate {
+        align-self: center;
     }
 }

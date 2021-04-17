@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppointmentDatePicker } from '../DatePicker';
+import { AppointmentDatePicker } from '../datePicker';
 import { RootState } from '../../store';
-import { AvailableTime } from '../AvailableTime';
+import { AvailableTime } from '../availableTime';
 import { changeDateFormat, monthLastDay } from '../../utils/date';
 import { getAvailabilityDays } from '../../store/modules/availabilityDate';
 
@@ -21,6 +21,8 @@ export const BookingDate = () => {
     useEffect(() => {
         getAvailableDate(today, thisMonthlastDate);
     }, []);
+
+    console.log('availableTimesLoaded', availableTimesLoaded)
 
     return (
         <div className={styles.container}>

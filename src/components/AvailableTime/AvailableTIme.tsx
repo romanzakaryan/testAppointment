@@ -1,12 +1,24 @@
+import { MouseEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { availableTimes } from '../../store/modules/availabilityTime';
-import { useSelector } from 'react-redux';
+import { fetchAppointmentInfo } from '../../store/modules/appointmentForm';
 import styles from './styles.module.scss';
 
 export const AvailableTime = () => {
-    const timeButton = (time: string) => (
-        <button className={styles.timeButton} key={time}>
-            {time}
+    const dispatch = useDispatch();
+    const handleTimeClick = (event: MouseEvent) => {
+        dispatch(fetchAppointmentInfo((event.target as HTMLInputElement).value))
+    };
+
+    const timeButton = (displayedtime: string, time: number) => (
+        <button
+            className={styles.timeButton}
+            key={displayedtime}
+            value={time}
+            onClick={handleTimeClick}
+        >
+            {displayedtime}
         </button>
     );
 
@@ -19,12 +31,13 @@ export const AvailableTime = () => {
     )
 
     const availableTimesArr = useSelector((state: RootState) => (state.app.availabilityTime.availableTimesData as availableTimes).availableTimes);
+    console.log('availableTimesArr', availableTimesArr)
 
     return (
         <div className={styles.container}>
             <div className={styles.containerTime}>
                 {availableTimesArr.length
-                    ? availableTimesArr.map(time => timeButton(time.displayTime))
+                    ? availableTimesArr.map(time => timeButton(time.displayTime, time.time))
                     : noAvailableTime
                 }
                 
