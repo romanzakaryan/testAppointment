@@ -22,8 +22,6 @@ export const BookingDate = () => {
         getAvailableDate(today, thisMonthlastDate);
     }, []);
 
-    console.log('availableTimesLoaded', availableTimesLoaded)
-
     return (
         <div className={styles.container}>
             { availableDaysLoaded &&

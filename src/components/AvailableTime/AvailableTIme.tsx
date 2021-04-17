@@ -31,7 +31,6 @@ export const AvailableTime = () => {
     )
 
     const availableTimesArr = useSelector((state: RootState) => (state.app.availabilityTime.availableTimesData as availableTimes).availableTimes);
-    console.log('availableTimesArr', availableTimesArr)
 
     return (
         <div className={styles.container}>

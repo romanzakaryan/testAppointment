@@ -2,16 +2,16 @@ import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { deleteAppointmentInfo } from '../../store/modules/appointmentForm';
+import { deleteAppointmentInfo, fetchFinalFormBooking, payloadBooking } from '../../store/modules/appointmentForm';
 import { getWeekDayText } from '../../utils/date';
 import { validateEmail } from '../../utils/form';
 import styles from './styles.module.scss';
 
 export const AppointmentForm = () => {
     const dispatch = useDispatch();
-    const onSubmit = () => {
-        console.log('submit')
-    }
+    const onSubmit = useCallback((values: payloadBooking) => {
+        dispatch(fetchFinalFormBooking(values));
+    }, [dispatch]);
 
     const handleCancel = useCallback(() => {
         dispatch(deleteAppointmentInfo());
