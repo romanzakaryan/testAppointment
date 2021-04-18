@@ -11,7 +11,7 @@ export const getAvailabilityDays = createAsyncThunk<availableDate, availabilityA
         const response = await getAvailabilityDaysAPI(firstDate, lastDate, serviceId, resourceId, locationId);
 
         if (!response) {
-            throw new Error();
+            throw new Error('getAvailabilityDaysAPI failed');
         }
 
         return response;

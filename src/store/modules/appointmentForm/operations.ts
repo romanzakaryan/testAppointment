@@ -22,7 +22,7 @@ export const fetchAppointmentInfo = (time: string): AppThunk => async (dispatch,
         const response = await postAppointmentAPI(payload);
 
         if (!response) {
-            throw new Error();
+            throw new Error('postAppointmentAPI failed');
         }
 
         dispatch(sendAppointmentDate(response))
@@ -41,7 +41,7 @@ export const deleteAppointmentInfo = (): AppThunk => async (dispatch, getState) 
         const response = await deleteAppointmentAPI(appointmentId);
 
         if (!response) {
-            throw new Error();
+            throw new Error('deleteAppointmentAPI failed');
         }
 
         dispatch(cancelAppointmentForm())
@@ -63,7 +63,7 @@ export const fetchFinalFormBooking = (payload: payloadBooking): AppThunk => asyn
         const existenceResponse = await getCurrentUserAppointmentInfo(email, startDate, serviceId, resourceId);
 
         if (!existenceResponse) {
-            throw new Error();
+            throw new Error('getCurrentUserAppointmentInfo failed');
         }      
         dispatch(sendExistedAppointmentData(existenceResponse))
 
@@ -76,7 +76,7 @@ export const fetchFinalFormBooking = (payload: payloadBooking): AppThunk => asyn
         const sendedFormResponse = await finalBookingAPI(appointmentId, payload);
 
         if (!sendedFormResponse) {
-            throw new Error();
+            throw new Error('finalBookingAPI failed');
         }   
         dispatch(sendBookedFinalForm(sendedFormResponse));
         dispatch(showSuccessPage());
