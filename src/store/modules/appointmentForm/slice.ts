@@ -29,7 +29,6 @@ const appointmentFormData = createSlice({
             state.showForm = false;
         },
         sendExistedAppointmentData: (state, action: PayloadAction<existedCustomer>) => {
-            state.showModal = false;
             state.customerExistedAppointment = action.payload;
         },
         showSuccessPage: (state) => {
