@@ -1,12 +1,20 @@
-import { appointmentPostResponse, existedCustomer, existedCustomerData, payloadBooking, postAppointmentData } from '../store/modules/appointmentForm';
+import {
+    appointmentPostResponse,
+    existedCustomer,
+    existedCustomerData,
+    payloadBooking,
+    postAppointmentData
+} from '../store/modules/appointmentForm';
 import { availableDate } from '../store/modules/availabilityDate';
 import { availableTimes } from '../store/modules/availabilityTime';
 import { serviceID, locationID, resourceID } from './../constants/appointmentInfo';
+import { clientId } from './constants/oauth';
+
 const oauthToken = JSON.parse(localStorage.getItem('profile') || '{}').access_token;
 const apiBaseUrl = 'https://sandbox-api.onsched.com';
 const clientTmz = -new Date().getTimezoneOffset();
 
-export const getToken = async (clientId: string): Promise<string | never> => {
+export const getToken = async (): Promise<string | never> => {
     try {
         const url = "https://sandbox-js.onsched.com/auth/initialize";
         const scope = "OnSchedApi";

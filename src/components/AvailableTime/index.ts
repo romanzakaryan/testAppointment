@@ -1,1 +1,1 @@
-export {AvailableTime} from './AvailableTime';
+export {AvailableTime} from './AvailableTIme';
