@@ -1,21 +1,21 @@
 import { availableTime } from './../availabilityTime/types';
 import { deleteAppointmentAPI, finalBookingAPI, getCurrentUserAppointmentInfo, postAppointmentAPI } from '../../../api';
 import { appointmentPostResponse, AppThunk, payloadBooking } from './types';
-import { serviceID, locationID, resourceID } from '../../../constants/appointmentInfo';
 import { cancelAppointmentForm, sendAppointmentDate, sendBookedFinalForm, sendExistedAppointmentData, showSuccessPage } from './slice';
 import { changeDateFormat } from '../../../utils/date';
 
 export const fetchAppointmentInfo = (time: string): AppThunk => async (dispatch, getState) => {
     const state = getState();
     const availableTimeData = state.app.availabilityTime.availableTimesData.availableTimes.find(item => item.time === Number(time));
+    const {serviceId, resourceId, locationId} = state.app.preAppointmentData;
     const {endDateTime, startDateTime} = availableTimeData as availableTime;
 
     const payload = {
         startDateTime,
         endDateTime,
-        serviceID,
-        locationID,
-        resourceID
+        serviceId,
+        resourceId,
+        locationId
     };
 
     try {
@@ -55,11 +55,12 @@ export const deleteAppointmentInfo = (): AppThunk => async (dispatch, getState) 
 export const fetchFinalFormBooking = (payload: payloadBooking): AppThunk => async (dispatch, getState) => {
     const state = getState();
     const {id: appointmentId} = state.app.appointmentForm.appointmentDate as appointmentPostResponse;
+    const {serviceId, resourceId} = state.app.preAppointmentData;
     const {email} = payload;
     const startDate = changeDateFormat(new Date());
 
     try {
-        const existenceResponse = await getCurrentUserAppointmentInfo(email, startDate);
+        const existenceResponse = await getCurrentUserAppointmentInfo(email, startDate, serviceId, resourceId);
 
         if (!existenceResponse) {
             throw new Error();

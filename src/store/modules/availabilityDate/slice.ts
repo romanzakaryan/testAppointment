@@ -8,7 +8,7 @@ export const initialState: availableDateState = {
     isLoaded: false
 };
 
-export const availabilitySlice = createSlice({
+const availabilitySlice = createSlice({
     name: 'availableDate',
     initialState,
     reducers: {},

@@ -5,8 +5,10 @@ import { getAvailabilityTimesAPI } from '../../../api';
 
 export const getAvailabilityTimes = createAsyncThunk<availableTimes, string, { state: RootState }>(
     'availability/getAvailabilityTime',
-    async (firstDate) => {
-        const response = await getAvailabilityTimesAPI(firstDate);
+    async (firstDate, {getState}) => {
+        const state = getState();
+        const {serviceId, resourceId, locationId} = state.app.preAppointmentData;
+        const response = await getAvailabilityTimesAPI(firstDate, serviceId, resourceId, locationId);
 
         if (!response) {
             throw new Error();

@@ -11,9 +11,9 @@ Action<string>
 export type postAppointmentData = {
     startDateTime: string,
     endDateTime: string,
-    locationID: string,
-    resourceID: string,
-    serviceID: string
+    locationId: string,
+    resourceId: string,
+    serviceId: string
 }
 
 export type appointmentPostResponse = {

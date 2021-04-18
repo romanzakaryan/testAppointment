@@ -4,6 +4,7 @@ import {createBrowserHistory, History} from 'history';
 import availabilityDateReducer from './modules/availabilityDate';
 import availabilityTimeReducer from './modules/availabilityTime';
 import appointmentFormReducer from './modules/appointmentForm';
+import preAppointmentDataReducer from './modules/preAppointmentData';
 
 const history = createBrowserHistory();
 
@@ -11,6 +12,7 @@ const appReducer = combineReducers({
     availabilityDate: availabilityDateReducer,
     availabilityTime: availabilityTimeReducer,
     appointmentForm:  appointmentFormReducer,
+    preAppointmentData: preAppointmentDataReducer
 });
 
 const rootReducer = (history: History) => combineReducers({

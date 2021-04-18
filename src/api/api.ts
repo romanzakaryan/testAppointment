@@ -7,7 +7,6 @@ import {
 } from '../store/modules/appointmentForm';
 import { availableDate } from '../store/modules/availabilityDate';
 import { availableTimes } from '../store/modules/availabilityTime';
-import { serviceID, locationID, resourceID } from './../constants/appointmentInfo';
 import { clientId } from './constants/oauth';
 
 const oauthToken = JSON.parse(localStorage.getItem('profile') || '{}').access_token;
@@ -40,10 +39,16 @@ export const getToken = async (): Promise<string | never> => {
     }
 }
 
-export const getAvailabilityDaysAPI = async (firstdate: string, lastDate: string): Promise<availableDate | never> => {
+export const getAvailabilityDaysAPI = async (
+    firstdate: string,
+    lastDate: string,
+    serviceId: string,
+    resourceId: string,
+    locationId: string
+): Promise<availableDate | never> => {
     try {
         const response = await fetch(
-            `${apiBaseUrl}/consumer/v1/availability/${serviceID}/${firstdate}/${lastDate}/days?locationId=${locationID}&resourceId=${resourceID}&tzOffset=${clientTmz}`,
+            `${apiBaseUrl}/consumer/v1/availability/${serviceId}/${firstdate}/${lastDate}/days?locationId=${locationId}&resourceId=${resourceId}&tzOffset=${clientTmz}`,
         {
             headers: {
                 'Authorization': `Bearer ${oauthToken}`,
@@ -63,10 +68,15 @@ export const getAvailabilityDaysAPI = async (firstdate: string, lastDate: string
     }
 }
 
-export const getAvailabilityTimesAPI = async (firstdate: string): Promise<availableTimes | never> => {
+export const getAvailabilityTimesAPI = async (
+    firstdate: string,
+    serviceId: string,
+    resourceId: string,
+    locationId: string
+): Promise<availableTimes | never> => {
     try {
         const response = await fetch(
-            `${apiBaseUrl}/consumer/v1/availability/${serviceID}/${firstdate}/${firstdate}/times?locationId=${locationID}&resourceId=${resourceID}&tzOffset=${clientTmz}`,
+            `${apiBaseUrl}/consumer/v1/availability/${serviceId}/${firstdate}/${firstdate}/times?locationId=${locationId}&resourceId=${resourceId}&tzOffset=${clientTmz}`,
         {
             headers: {
                 'Authorization': `Bearer ${oauthToken}`,
@@ -163,10 +173,15 @@ export const deleteAppointmentAPI = async (id: string): Promise<string | never> 
     }
 }
 
-export const getCurrentUserAppointmentInfo = async (email: string, startDate: string): Promise<existedCustomer | never> => {
+export const getCurrentUserAppointmentInfo = async (
+    email: string,
+    startDate: string,
+    serviceId: string,
+    resourceId: string,
+): Promise<existedCustomer | never> => {
     try {
         const response = await fetch(
-            `${apiBaseUrl}/consumer/v1/appointments/?email=${email}&serviceId=${serviceID}&resourceId=${resourceID}startDate=${startDate}`,
+            `${apiBaseUrl}/consumer/v1/appointments/?email=${email}&serviceId=${serviceId}&resourceId=${resourceId}startDate=${startDate}`,
         {
             headers: {
                 'Authorization': `Bearer ${oauthToken}`,

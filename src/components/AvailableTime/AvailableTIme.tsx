@@ -34,17 +34,21 @@ export const AvailableTime = () => {
         <div className={styles.buttonsBlock}>
             {morningArr.length
                 ? (
-                    <div className={styles.morning}>
+                    <div className={styles.periodBlock}>
                         <p>Morning</p>
-                        {morningArr.map(time => timeButton(time.displayTime, time.time))}
+                        <div className={styles.buttons}>
+                            {morningArr.map(time => timeButton(time.displayTime, time.time))}
+                        </div>
                     </div>
                 ) : undefined
             }
             {eveningArr.length 
                 ? (
-                    <div className={styles.evening}>
+                    <div className={styles.periodBlock}>
                         <p>Evening</p>
-                        {eveningArr.map(time => timeButton(time.displayTime, time.time))}
+                        <div className={styles.buttons}>
+                            {eveningArr.map(time => timeButton(time.displayTime, time.time))}
+                        </div>
                     </div>
                 ) : undefined
             }
