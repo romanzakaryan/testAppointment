@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import DateFnsUtils from '@date-io/date-fns';
-import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 import { getAvailabilityDays } from '../../store/modules/availabilityDate';
 import { changeDateFormat, monthLastDay } from '../../utils/date';
 import { RootState } from '../../store';
@@ -16,7 +16,6 @@ export const AppointmentDatePicker = () => {
     const getAvailableDate = useCallback((firstDate, lastDate) => {
             dispatch(getAvailabilityDays({firstDate, lastDate}));
     }, [dispatch]);
-
     const [selectedDate, setSelectedDate] = React.useState(new Date());
     const {isLoading} = useSelector((state: RootState) => (state.app.availabilityDate));
     const {resourceName, availableDays, serviceName} = useSelector((state: RootState) => state.app.availabilityDate.availableData);

@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { deleteAppointmentInfo, fetchFinalFormBooking, payloadBooking } from '../../store/modules/appointmentForm';
-import { getWeekDayText } from '../../utils/date';
+import { deleteAppointmentInfo, existedCustomerData, fetchFinalFormBooking, payloadBooking } from '../../store/modules/appointmentForm';
+import { dateLine } from '../../utils/date';
 import { validateEmail } from '../../utils/form';
 import styles from './styles.module.scss';
 
@@ -17,14 +17,21 @@ export const AppointmentForm = () => {
         dispatch(deleteAppointmentInfo());
     }, [dispatch]);
     
-    const {resourceName, serviceName} = useSelector((state: RootState) => state.app.availabilityDate.availableData);
+    const {
+        businessName,
+        resourceName,
+        serviceName,
+        duration,
+        startDateTime,
+        time
+    } = useSelector((state: RootState) => state.app.appointmentForm.appointmentDate as existedCustomerData);
 
     const formHeader = (
         <div className={styles.AppointmentInfo}>
-            {/* <p className={styles.choosedDay}>{getWeekDayText(selectedDate)}</p> */}
-            {/* <span className={styles.choosedDate}>{new Date(selectedDate).getDate()}</span> */}
+            <h4>{businessName}</h4>
             <p>{serviceName}</p>
-            <p>{resourceName}</p>
+            <p>{duration} min - {resourceName}</p>
+            <p className={styles.choosedDay}>{dateLine(startDateTime, time)}</p>
         </div>
     )
 

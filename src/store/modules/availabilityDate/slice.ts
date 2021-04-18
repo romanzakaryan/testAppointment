@@ -23,7 +23,7 @@ export const availabilitySlice = createSlice({
                     ...action.payload
                 },
                 isLoading: false,
-                isLoaded: true
+                isLoaded: true,
             }
         ));
         builder.addCase(getAvailabilityDays.rejected, (state) => {

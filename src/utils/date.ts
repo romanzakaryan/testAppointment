@@ -19,3 +19,32 @@ export const getWeekDayText = (day: Date) => {
 
     return weekDaysArr[dayNum]
 } 
+
+export const getMonthText = (day: Date) => {
+    const monthNum = day.getMonth();
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    return monthNames[monthNum];
+}
+
+export const from24To12 = (time: number) => {
+    const hourEnd = time > 9 ? 2 : 1;
+    const minutes = String(time).slice(-2);
+    const hour = +String(time).substr(0, hourEnd);
+    const h = hour % 12 || 12;
+    const ampm = (hour < 12 || hour === 24) ? "AM" : "PM";
+    const timeString = `${h}:${minutes} ${ampm}`;
+
+    return timeString;
+}
+
+export const dateLine = (dateString: string, time: number) => {
+    const date = new Date(dateString);
+    const stringTime = from24To12(time);
+
+    return `${getWeekDayText(date)}, ${getMonthText(date)} ${date.getDate()}, ${date.getFullYear()} at ${stringTime}`;
+}
+

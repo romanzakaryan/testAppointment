@@ -1,5 +1,6 @@
 import reducer from './slice';
 
+export * from './slice';
 export * from './types';
 export { getAvailabilityDays } from './operations';
 

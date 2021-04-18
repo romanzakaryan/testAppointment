@@ -1,8 +1,8 @@
 import { availableTime } from './../availabilityTime/types';
 import { deleteAppointmentAPI, finalBookingAPI, getCurrentUserAppointmentInfo, postAppointmentAPI } from '../../../api';
-import { appointmentPostResponse, AppThunk, existedCustomer, payloadBooking } from './types';
+import { appointmentPostResponse, AppThunk, payloadBooking } from './types';
 import { serviceID, locationID, resourceID } from '../../../constants/appointmentInfo';
-import { cancelAppointmentForm, sendAppointmentDate, sendBookedFinalForm, sendExistedAppointmentData } from './slice';
+import { cancelAppointmentForm, sendAppointmentDate, sendBookedFinalForm, sendExistedAppointmentData, showSuccessPage } from './slice';
 import { changeDateFormat } from '../../../utils/date';
 
 export const fetchAppointmentInfo = (time: string): AppThunk => async (dispatch, getState) => {
@@ -54,9 +54,9 @@ export const deleteAppointmentInfo = (): AppThunk => async (dispatch, getState) 
 
 export const fetchFinalFormBooking = (payload: payloadBooking): AppThunk => async (dispatch, getState) => {
     const state = getState();
-    const {id: appointmentId, startDateTime} = state.app.appointmentForm.appointmentDate as appointmentPostResponse;
+    const {id: appointmentId} = state.app.appointmentForm.appointmentDate as appointmentPostResponse;
     const {email} = payload;
-    const startDate = changeDateFormat(new Date(startDateTime));
+    const startDate = changeDateFormat(new Date());
 
     try {
         const existenceResponse = await getCurrentUserAppointmentInfo(email, startDate);
@@ -66,9 +66,9 @@ export const fetchFinalFormBooking = (payload: payloadBooking): AppThunk => asyn
         }      
         dispatch(sendExistedAppointmentData(existenceResponse))
 
-        console.log('resp', existenceResponse)
-
         if(existenceResponse.count){
+            dispatch(cancelAppointmentForm());
+            dispatch(showSuccessPage());
             return existenceResponse;
         }
 
@@ -77,7 +77,8 @@ export const fetchFinalFormBooking = (payload: payloadBooking): AppThunk => asyn
         if (!sendedFormResponse) {
             throw new Error();
         }   
-        dispatch(sendBookedFinalForm(sendedFormResponse))
+        dispatch(sendBookedFinalForm(sendedFormResponse));
+        dispatch(showSuccessPage());
 
         
     } catch (err) {

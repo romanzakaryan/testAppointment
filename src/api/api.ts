@@ -1,4 +1,4 @@
-import { existedCustomer, payloadBooking, postAppointmentData } from '../store/modules/appointmentForm';
+import { appointmentPostResponse, existedCustomer, existedCustomerData, payloadBooking, postAppointmentData } from '../store/modules/appointmentForm';
 import { availableDate } from '../store/modules/availabilityDate';
 import { availableTimes } from '../store/modules/availabilityTime';
 import { serviceID, locationID, resourceID } from './../constants/appointmentInfo';
@@ -78,7 +78,7 @@ export const getAvailabilityTimesAPI = async (firstdate: string): Promise<availa
     }
 }
 
-export const postAppointmentAPI = async (payload: postAppointmentData): Promise<string | never> => {
+export const postAppointmentAPI = async (payload: postAppointmentData): Promise<existedCustomerData | never> => {
     try {
         const response = await fetch(
             `${apiBaseUrl}/consumer/v1/appointments`,
@@ -104,7 +104,7 @@ export const postAppointmentAPI = async (payload: postAppointmentData): Promise<
     }
 }
 
-export const finalBookingAPI = async (id: string, payload: payloadBooking): Promise<string | never> => {
+export const finalBookingAPI = async (id: string, payload: payloadBooking): Promise<appointmentPostResponse | never> => {
     try {
         const response = await fetch(
             `${apiBaseUrl}/consumer/v1/appointments/${id}/book`,
