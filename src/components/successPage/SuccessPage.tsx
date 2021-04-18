@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../../store';
 import { appointmentPostResponse, existedCustomer, resetFormInfo } from '../../store/modules/appointmentForm';
 import { dateLine } from '../../utils/date';
+
 import styles from './styles.module.scss';
 
 export const SuccessPage = () => {

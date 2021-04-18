@@ -5,6 +5,7 @@ import { RootState } from '../../store';
 import { deleteAppointmentInfo, existedCustomerData, fetchFinalFormBooking, payloadBooking } from '../../store/modules/appointmentForm';
 import { dateLine } from '../../utils/date';
 import { validateEmail } from '../../utils/form';
+
 import styles from './styles.module.scss';
 
 export const AppointmentForm = () => {

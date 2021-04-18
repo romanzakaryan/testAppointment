@@ -4,7 +4,19 @@
         display: flex;
         flex-wrap: wrap;
         max-width: 225px;
-    
+        .morning {
+            margin-bottom: 15px;
+        }
+        .buttonsBlock {
+            p {
+                font-size: 14px;
+                border-bottom: 1px solid #3f51b5;
+                margin-bottom: 5px;
+                padding-bottom: 4px;
+                font-weight: bold;
+                color: #3f51b5;
+            }
+        }   
         .timeButton {
             flex: 0 1 100px;
             margin: 6px;

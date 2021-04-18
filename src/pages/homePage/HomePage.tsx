@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { resetFormInfo } from '../../store/modules/appointmentForm';
+
 import styles from './styles.module.scss';
 
 export const HomePage = () => {
