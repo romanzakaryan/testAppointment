@@ -32,7 +32,7 @@ export const AvailableTime = () => {
 
     const buttonsBlock = (
         <div className={styles.buttonsBlock}>
-            {morningArr.length
+            {morningArr?.length
                 ? (
                     <div className={styles.periodBlock}>
                         <p>Morning</p>
@@ -42,7 +42,7 @@ export const AvailableTime = () => {
                     </div>
                 ) : undefined
             }
-            {eveningArr.length 
+            {eveningArr?.length 
                 ? (
                     <div className={styles.periodBlock}>
                         <p>Evening</p>
@@ -67,7 +67,7 @@ export const AvailableTime = () => {
     return (
         <div className={styles.container}>
             <div className={styles.containerTime}>
-                {availableTimesArr.length
+                {availableTimesArr?.length
                     ? buttonsBlock
                     : noAvailableTime
                 }
