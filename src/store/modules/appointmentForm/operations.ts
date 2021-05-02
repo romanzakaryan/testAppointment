@@ -62,6 +62,7 @@ export const fetchFinalFormBooking = (payload: payloadBooking): AppThunk => asyn
     const startDate = changeDateFormat(new Date());
 
     try {
+        dispatch(setLoading());
         const existenceResponse = await getCurrentUserAppointmentInfo(email, startDate, serviceId, resourceId);
 
         if (!existenceResponse) {
