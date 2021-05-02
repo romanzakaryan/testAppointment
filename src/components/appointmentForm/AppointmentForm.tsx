@@ -64,7 +64,7 @@ export const AppointmentForm = () => {
                         <Field name="firstName">
                             {({ input, meta }) => (
                                 <div className={styles.inputDefault}>
-                                    <label>First name<sup>*</sup></label>
+                                    <label>First name</label>
                                     <input
                                         {...input}
                                         type="text"
@@ -78,7 +78,7 @@ export const AppointmentForm = () => {
                         <Field name="lastName">
                             {({ input, meta }) => (
                                 <div className={styles.inputDefault}>
-                                    <label>Last name<sup>*</sup></label>
+                                    <label>Last name</label>
                                     <input
                                         {...input}
                                         type="text"
@@ -92,7 +92,7 @@ export const AppointmentForm = () => {
                         <Field name="email">
                             {({ input, meta }) => (
                                 <div className={styles.inputDefault}>
-                                    <label>Email<sup>*</sup></label>
+                                    <label>Email</label>
                                     <input
                                         {...input}
                                         type="text"
@@ -106,7 +106,7 @@ export const AppointmentForm = () => {
                         <Field name="phone">
                             {({ input }) => (
                                 <div className={styles.inputDefault}>
-                                    <label>Phone</label>
+                                    <label>Phone<span className={styles.optionalField}>&nbsp;- Optional</span></label>
                                     <input {...input} type="tel" placeholder="Enter phone number"/>
                                 </div>
                             )}
@@ -114,8 +114,8 @@ export const AppointmentForm = () => {
                         <Field name="customerMessage">
                             {({ input }) => (
                                 <div className={`${styles.inputDefault} ${styles.inputMessage}`}>
-                                    <label>Customer message</label>
-                                    <textarea {...input} placeholder="Send us a message (optional)" />
+                                    <label>Customer message<span className={styles.optionalField}>&nbsp;- Optional</span></label>
+                                    <textarea {...input} placeholder="Send us a message" />
                                 </div>
                             )}
                         </Field>

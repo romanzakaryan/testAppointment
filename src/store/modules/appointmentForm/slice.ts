@@ -2,37 +2,47 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { appointmentPostResponse, existedCustomer, existedCustomerData } from './types';
 
 const initialState = {
-    showModal: false,
+    showForm: false,
     appointmentDate: {},
     appointmentFormData: {},
     customerExistedAppointment: {},
     showSuccessPage: false,
-    showForm: true
+    showDateSelect: true,
+    isLoading: false
 };
 
 const appointmentFormData = createSlice({
     name: 'appointmentForm',
     initialState,
     reducers: {
+        setLoading: (state) => {
+            state.isLoading = true;
+            state.showForm = false;
+            state.showDateSelect = false;
+        },
         sendAppointmentDate: (state, action: PayloadAction<existedCustomerData>) => {
             state.appointmentDate = action.payload;
-            state.showModal = true;
+            state.showForm = true;
             state.showSuccessPage = false;
+            state.isLoading = false;
         },
         cancelAppointmentForm: (state) => {
             state.appointmentDate = {};
-            state.showModal = false;
+            state.showDateSelect = true;
+            state.showForm = false;
+            state.isLoading = false;
         },
         sendBookedFinalForm: (state, action: PayloadAction<appointmentPostResponse>) => {
-            state.showModal = false;
-            state.appointmentFormData = action.payload;
             state.showForm = false;
+            state.appointmentFormData = action.payload;
+            state.showDateSelect = false;
+            state.isLoading = false;
         },
         sendExistedAppointmentData: (state, action: PayloadAction<existedCustomer>) => {
             state.customerExistedAppointment = action.payload;
         },
         showSuccessPage: (state) => {
-            state.showForm = false;
+            state.showDateSelect = false;
             state.showSuccessPage = true;
         },
         resetFormInfo: (state) => ({
@@ -43,6 +53,7 @@ const appointmentFormData = createSlice({
 });
 
 export const {
+    setLoading,
     sendAppointmentDate,
     cancelAppointmentForm,
     sendBookedFinalForm,

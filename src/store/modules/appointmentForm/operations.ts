@@ -1,7 +1,7 @@
 import { availableTime } from './../availabilityTime/types';
 import { deleteAppointmentAPI, finalBookingAPI, getCurrentUserAppointmentInfo, postAppointmentAPI } from '../../../api';
 import { appointmentPostResponse, AppThunk, payloadBooking } from './types';
-import { cancelAppointmentForm, sendAppointmentDate, sendBookedFinalForm, sendExistedAppointmentData, showSuccessPage } from './slice';
+import { cancelAppointmentForm, sendAppointmentDate, sendBookedFinalForm, sendExistedAppointmentData, showSuccessPage, setLoading } from './slice';
 import { changeDateFormat } from '../../../utils/date';
 
 export const fetchAppointmentInfo = (time: string): AppThunk => async (dispatch, getState) => {
@@ -19,6 +19,7 @@ export const fetchAppointmentInfo = (time: string): AppThunk => async (dispatch,
     };
 
     try {
+        dispatch(setLoading());
         const response = await postAppointmentAPI(payload);
 
         if (!response) {
@@ -38,6 +39,7 @@ export const deleteAppointmentInfo = (): AppThunk => async (dispatch, getState) 
     const {id: appointmentId} = state.app.appointmentForm.appointmentDate as appointmentPostResponse;
 
     try {
+        dispatch(setLoading());
         const response = await deleteAppointmentAPI(appointmentId);
 
         if (!response) {

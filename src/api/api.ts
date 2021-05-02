@@ -25,7 +25,7 @@ export async function requestApi(url: string, method = 'GET', body: any = null, 
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.message || 'Smth goes wrong')
+        throw new Error(data.message || data.error || 'Smth goes wrong')
       }
 
       return data
@@ -93,4 +93,4 @@ export const getCurrentUserAppointmentInfo = async (
     startDate: string,
     serviceId: string,
     resourceId: string,
-): Promise<existedCustomer | never> => requestApi(`${apiBaseUrl}/consumer/v1/appointments/?email=${email}&serviceId=${serviceId}&resourceId=${resourceId}startDate=${startDate}`);
+): Promise<existedCustomer | never> => requestApi(`${apiBaseUrl}/consumer/v1/appointments/?email=${encodeURIComponent(email)}&serviceId=${serviceId}&resourceId=${resourceId}&startDate=${startDate}`);
