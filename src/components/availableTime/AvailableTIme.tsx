@@ -57,6 +57,8 @@ export const AvailableTime = () => {
 
     const noAvailableTime = (
         <div className={styles.noAvailableTime}>
+            <span>&#9432;</span>
+            &nbsp;
             <p>
                 No times available on this date
             </p>

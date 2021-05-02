@@ -6,10 +6,7 @@
 
     .form {
         display: flex;
-        width: 600px;
         padding: 30px;
-        background: white;
-        border-radius: 5px;
         flex-wrap: wrap;
         justify-content: space-between;
         box-sizing: border-box;
@@ -52,8 +49,8 @@
             height: auto;
 
             textarea {
+                font-family: Arial, Helvetica, sans-serif;
                 height: 100px;
-                padding: 5px;
             }
         }
 
@@ -70,10 +67,18 @@
                 background: green;
                 color: white;
                 font-weight: 700;
+                &:hover {
+                    background: rgb(6, 90, 6);
+                    border: 2px solid rgb(6, 90, 6);
+                }
             }
             .cancelButton {
-                border: 2px solid red;
-                background: red;
+                border: 2px solid rgb(206, 4, 4);
+                background: rgb(206, 4, 4);
+                &:hover{
+                    background: rgb(134, 10, 10);
+                    border: 2px solid rgb(134, 10, 10);
+                }
             }
         }
         textarea {

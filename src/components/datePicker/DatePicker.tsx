@@ -19,6 +19,8 @@ export const AppointmentDatePicker = () => {
     const [selectedDate, setSelectedDate] = React.useState(new Date());
     const {isLoading} = useSelector((state: RootState) => (state.app.availabilityDate));
     const {resourceName, availableDays, serviceName} = useSelector((state: RootState) => state.app.availabilityDate.availableData);
+
+    // Disable all dates in calendar, which https://sandbox-api.onsched.com/consumer/v1/availability return as unavailable
     const disableDays = (date: MaterialUiPickersDate) => {
         if(isLoading) {
             return true;
@@ -69,7 +71,7 @@ export const AppointmentDatePicker = () => {
                     onChange={handleDateChange}
                     variant='static'
                     disablePast={true}
-                    shouldDisableDate={disableDays}
+                    // shouldDisableDate={disableDays}
                     onMonthChange={handleMonthChange}
                     disableToolbar={true}
                 />
