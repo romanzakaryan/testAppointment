@@ -168,3 +168,20 @@ export type auditTrail = {
     notesBefore: string,
     notesAfter: string
 }
+
+export type formState = {
+    showForm: boolean,
+    appointmentDate: existedCustomerData,
+    appointmentFormData: appointmentPostResponse,
+    customerExistedAppointment: existedCustomer,
+    showSuccessPage: boolean,
+    showDateSelect: boolean,
+    isLoading: boolean,
+    isError: errorState,
+}
+
+export type errorState = {
+    isError: boolean,
+    text: string,
+    type: string
+}

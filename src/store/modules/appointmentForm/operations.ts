@@ -1,7 +1,20 @@
 import { availableTime } from './../availabilityTime/types';
-import { deleteAppointmentAPI, finalBookingAPI, getCurrentUserAppointmentInfo, postAppointmentAPI } from '../../../api';
-import { appointmentPostResponse, AppThunk, payloadBooking } from './types';
-import { cancelAppointmentForm, sendAppointmentDate, sendBookedFinalForm, sendExistedAppointmentData, showSuccessPage, setLoading } from './slice';
+import {
+    deleteAppointmentAPI,
+    finalBookingAPI,
+    getCurrentUserAppointmentInfo,
+    postAppointmentAPI
+} from '../../../api';
+import { AppThunk, payloadBooking } from './types';
+import {
+    cancelAppointmentForm,
+    sendAppointmentDate,
+    sendBookedFinalForm,
+    sendExistedAppointmentData,
+    showSuccessPage,
+    setLoading,
+    setError
+} from './slice';
 import { changeDateFormat } from '../../../utils/date';
 
 export const fetchAppointmentInfo = (time: string): AppThunk => async (dispatch, getState) => {
@@ -23,40 +36,48 @@ export const fetchAppointmentInfo = (time: string): AppThunk => async (dispatch,
         const response = await postAppointmentAPI(payload);
 
         if (!response) {
-            throw new Error('postAppointmentAPI failed');
+            throw new Error('Smth goes wrong with sending appointment info');
         }
 
         dispatch(sendAppointmentDate(response))
 
         return response;
     } catch (err) {
-        console.log(err);
+        dispatch(setError({
+            isError: true,
+            text: err.toString(),
+            type: 'fetchAppointmentInfo'
+        }))
     }
 };
 
 export const deleteAppointmentInfo = (): AppThunk => async (dispatch, getState) => {
     const state = getState();
-    const {id: appointmentId} = state.app.appointmentForm.appointmentDate as appointmentPostResponse;
+    const {id: appointmentId} = state.app.appointmentForm.appointmentDate;
 
     try {
         dispatch(setLoading());
         const response = await deleteAppointmentAPI(appointmentId);
 
         if (!response) {
-            throw new Error('deleteAppointmentAPI failed');
+            throw new Error('Smth goes wrong with deleting appointment');
         }
 
         dispatch(cancelAppointmentForm())
 
         return response;
     } catch (err) {
-        console.log(err);
+        dispatch(setError({
+            isError: true,
+            text: err.toString(),
+            type: 'deleteAppointmentInfo'
+        }))
     }
 };
 
 export const fetchFinalFormBooking = (payload: payloadBooking): AppThunk => async (dispatch, getState) => {
     const state = getState();
-    const {id: appointmentId} = state.app.appointmentForm.appointmentDate as appointmentPostResponse;
+    const {id: appointmentId} = state.app.appointmentForm.appointmentDate;
     const {serviceId, resourceId} = state.app.preAppointmentData;
     const {email} = payload;
     const startDate = changeDateFormat(new Date());
@@ -66,7 +87,7 @@ export const fetchFinalFormBooking = (payload: payloadBooking): AppThunk => asyn
         const existenceResponse = await getCurrentUserAppointmentInfo(email, startDate, serviceId, resourceId);
 
         if (!existenceResponse) {
-            throw new Error('getCurrentUserAppointmentInfo failed');
+            throw new Error('Smth goes wrong with getting appointment existence');
         }      
         dispatch(sendExistedAppointmentData(existenceResponse))
 
@@ -79,13 +100,17 @@ export const fetchFinalFormBooking = (payload: payloadBooking): AppThunk => asyn
         const sendedFormResponse = await finalBookingAPI(appointmentId, payload);
 
         if (!sendedFormResponse) {
-            throw new Error('finalBookingAPI failed');
+            throw new Error('Smth hoes wrong with final booking');
         }   
         dispatch(sendBookedFinalForm(sendedFormResponse));
         dispatch(showSuccessPage());
 
         
     } catch (err) {
-        console.log(err);
+        dispatch(setError({
+            isError: true,
+            text: err.toString(),
+            type: 'fetchFinalFormBooking'
+        }))
     }
 };

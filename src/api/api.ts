@@ -25,12 +25,12 @@ export async function requestApi(url: string, method = 'GET', body: any = null, 
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.message || data.error || 'Smth goes wrong')
+        throw new Error(data.error || 'Smth goes wrong')
       }
 
       return data
     } catch (e) {
-      throw e
+        throw e
     }
 }
 
