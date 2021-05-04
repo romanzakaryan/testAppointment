@@ -15,6 +15,7 @@ export const BookingDate = () => {
     const dispatch = useDispatch();
     const availableDaysLoaded = useSelector((state: RootState) => state.app.availabilityDate.isLoaded);
     const {isLoaded: availableTimesLoaded, isLoading: availableTimesLoading} = useSelector((state: RootState) => state.app.availabilityTime);
+    const {isLoading: availableDaysLoading} = useSelector((state: RootState) => state.app.availabilityDate);
     const getAvailableDate = useCallback((firstDate, lastDate) => {
         dispatch(getAvailabilityDays({firstDate, lastDate}));
     }, [dispatch]);
@@ -25,19 +26,22 @@ export const BookingDate = () => {
 
     return (
         <div className={styles.container}>
-            { availableDaysLoaded &&
-                <AppointmentDatePicker/>
-            }
-            { availableTimesLoaded &&
-                <AvailableTime />
-            }
-            {availableTimesLoading &&
-                <div className={styles.loaderContainer}>
-                    <CircularProgress 
-                        size={80}
-                    />
-                </div>
-            }
+            <h1>Select a Date & Time</h1>
+            <div className={styles.contentContainer}>
+                { availableDaysLoaded &&
+                    <AppointmentDatePicker/>
+                }
+                { availableTimesLoaded &&
+                    <AvailableTime />
+                }
+                {availableTimesLoading &&
+                    <div className={styles.loaderContainer}>
+                        <CircularProgress 
+                            size={80}
+                        />
+                    </div>
+                }
+            </div>
         </div>
     );
 }

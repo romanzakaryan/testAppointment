@@ -5,15 +5,17 @@
     border: 3px solid #3f51b5;
     border-radius: 10px;
     padding: 30px;
+    .loaderContainer {
+        align-self: center;
+    }
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 @media (max-width: 630px) {
     .container {
         border: none;
-        padding: 30px 20px;
+        padding: 30px;
         min-height: 0;
         display: block;
 

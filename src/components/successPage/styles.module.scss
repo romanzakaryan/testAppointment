@@ -1,5 +1,4 @@
 .container {
-    box-sizing: border-box;
     line-height: 1.6;
     font-weight: bold;
 
@@ -40,7 +39,7 @@
 
     .homeButton {
         border: 2px solid #3f51b5;
-        border-radius: 10px;
+        border-radius: 20px;
         cursor: pointer;
         font-weight: bold;
         background: white;

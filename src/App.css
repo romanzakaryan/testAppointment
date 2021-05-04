@@ -6,6 +6,7 @@
 
 * {
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 @media (max-width: 630px) {

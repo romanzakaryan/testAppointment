@@ -64,7 +64,7 @@ export const AppointmentDatePicker = () => {
 
     return (
         <div className={styles.containerDate}>
-            {datePickerHeader}
+            {/* {datePickerHeader} */}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DatePicker
                     value={selectedDate}

@@ -31,18 +31,19 @@ export const SuccessPage = () => {
     return (
         <div className={styles.container}>
             <div className={styles.successHeader}>
-                <h4>{businessName}</h4>
                 {isAppointmentExisted
-                    ? <div className={`${styles.text} ${styles.apologyText}`}>
-                        <span>&#9888;</span>
-                        &nbsp;
-                        <p>Sorry, but you already have a confirmed appointment {name}.</p>
-                    </div>
-                    : <div className={`${styles.text} ${styles.successText}`}>
-                        <span>&#10003;</span>
-                        &nbsp;
-                        <p>Your appointment has been confirmed {name}.</p>
-                    </div>
+                    ? <img src='/src/images/apology.jpeg' alt='apology'/>
+                    // ? <div className={`${styles.text} ${styles.apologyText}`}>
+                    //     <span>&#9888;</span>
+                    //     &nbsp;
+                    //     <p>Sorry, but you already have a confirmed appointment {name}.</p>
+                    // </div>
+                    : <img src='../../images/success.jpeg' alt='success'/>
+                    // : <div className={`${styles.text} ${styles.successText}`}>
+                    //     <span>&#10003;</span>
+                    //     &nbsp;
+                    //     <p>Your appointment has been confirmed {name}.</p>
+                    // </div>
                 }
                 
             </div>

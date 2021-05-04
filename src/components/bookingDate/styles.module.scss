@@ -1,15 +1,26 @@
-.container {
-    display: flex;
-    flex-direction: row;
-    flex: 1 0 100%;
-    .loaderContainer{
-        width: 100%;
-        align-self: center;
+.container{
+    width: 100%;
+    h1 {
+        font-size: 25px;
+        margin-bottom: 20px;
+        font-weight: normal;
+    }
+    
+    .contentContainer {
+        display: flex;
+        flex-direction: row;
+        flex: 1 0 100%;
+        .loaderContainer{
+            width: 100%;
+            align-self: center;
+        }
     }
 }
 
 @media (max-width: 630px) {
-    .container {
-        flex-direction: column;
+    .container{
+        .contentContainer {
+            flex-direction: column;
+        }
     }
 }

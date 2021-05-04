@@ -1,10 +1,9 @@
 import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { deleteAppointmentInfo, existedCustomerData, fetchFinalFormBooking, payloadBooking } from '../../store/modules/appointmentForm';
-import { dateLine } from '../../utils/date';
+import { useDispatch } from 'react-redux';
+import { deleteAppointmentInfo, fetchFinalFormBooking, payloadBooking } from '../../store/modules/appointmentForm';
 import { validateEmail } from '../../utils/form';
+import { AppointmentInfo } from '../appointmentInfo';
 
 import styles from './styles.module.scss';
 
@@ -17,27 +16,13 @@ export const AppointmentForm = () => {
     const handleCancel = useCallback(() => {
         dispatch(deleteAppointmentInfo());
     }, [dispatch]);
-    
-    const {
-        businessName,
-        resourceName,
-        serviceName,
-        duration,
-        startDateTime,
-        time
-    } = useSelector((state: RootState) => state.app.appointmentForm.appointmentDate as existedCustomerData);
-
-    const formHeader = (
-        <div className={styles.AppointmentInfo}>
-            <h4>{businessName}</h4>
-            <p>{serviceName}</p>
-            <p>{duration} min - {resourceName}</p>
-            <p className={styles.choosedDay}>{dateLine(startDateTime, time)}</p>
-        </div>
-    )
 
     return (
         <div className={styles.container}>
+            <div className={styles.containerHeader}>
+                <h1>Book your appointment</h1>
+                <AppointmentInfo />
+            </div>
             <Form
                 onSubmit={onSubmit}
                 validate={values => {
@@ -58,17 +43,13 @@ export const AppointmentForm = () => {
                 }}
                 render={({ handleSubmit, form, submitting, values }) => (
                     <form className={styles.form} onSubmit={handleSubmit}>
-                        <div className={styles.containerHeader}>
-                            {formHeader}
-                        </div>
                         <Field name="firstName">
                             {({ input, meta }) => (
                                 <div className={styles.inputDefault}>
-                                    <label>First name</label>
                                     <input
                                         {...input}
                                         type="text"
-                                        placeholder="Enter first name"
+                                        placeholder="First name&#42;"
                                         className={(meta.error && meta.touched) ? styles.error : undefined}
                                     />
                                     {meta.error && meta.touched && <span>{meta.error}</span>}
@@ -78,11 +59,10 @@ export const AppointmentForm = () => {
                         <Field name="lastName">
                             {({ input, meta }) => (
                                 <div className={styles.inputDefault}>
-                                    <label>Last name</label>
                                     <input
                                         {...input}
                                         type="text"
-                                        placeholder="Enter last name"
+                                        placeholder="Last name&#42;"
                                         className={(meta.error && meta.touched) ? styles.error : undefined}
                                     />
                                     {meta.error && meta.touched && <span>{meta.error}</span>}
@@ -92,11 +72,10 @@ export const AppointmentForm = () => {
                         <Field name="email">
                             {({ input, meta }) => (
                                 <div className={styles.inputDefault}>
-                                    <label>Email</label>
                                     <input
                                         {...input}
                                         type="text"
-                                        placeholder="Enter valid email address"
+                                        placeholder="Email&#42;"
                                         className={(meta.error && meta.touched) ? styles.error : undefined}
                                     />
                                     {meta.error && meta.touched && <span>{meta.error}</span>}
@@ -106,16 +85,14 @@ export const AppointmentForm = () => {
                         <Field name="phone">
                             {({ input }) => (
                                 <div className={styles.inputDefault}>
-                                    <label>Phone<span className={styles.optionalField}>&nbsp;- Optional</span></label>
-                                    <input {...input} type="tel" placeholder="Enter phone number"/>
+                                    <input {...input} type="tel" placeholder="Phone"/>
                                 </div>
                             )}
                         </Field>
                         <Field name="customerMessage">
                             {({ input }) => (
                                 <div className={`${styles.inputDefault} ${styles.inputMessage}`}>
-                                    <label>Customer message<span className={styles.optionalField}>&nbsp;- Optional</span></label>
-                                    <textarea {...input} placeholder="Send us a message" />
+                                    <textarea {...input} placeholder="Customer message"/>
                                 </div>
                             )}
                         </Field>
