@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import { deleteAppointmentInfo, fetchFinalFormBooking, payloadBooking } from '../../store/modules/appointmentForm';
 import { validateEmail } from '../../utils/form';
 import { AppointmentInfo } from '../appointmentInfo';
@@ -17,11 +18,25 @@ export const AppointmentForm = () => {
         dispatch(deleteAppointmentInfo());
     }, [dispatch]);
 
+    const {
+        resourceName,
+        serviceName,
+        duration,
+        startDateTime,
+        time
+    } = useSelector((state: RootState) => state.app.appointmentForm.appointmentDate);
+
     return (
         <div className={styles.container}>
             <div className={styles.containerHeader}>
                 <h1>Book your appointment</h1>
-                <AppointmentInfo />
+                <AppointmentInfo 
+                    resourceName={resourceName}
+                    serviceName={serviceName}
+                    duration={duration}
+                    startDateTime={startDateTime}
+                    time={time}
+                />
             </div>
             <Form
                 onSubmit={onSubmit}

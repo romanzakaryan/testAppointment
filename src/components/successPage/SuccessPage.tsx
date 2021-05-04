@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../store';
 import { appointmentPostResponse, existedCustomer, resetFormInfo } from '../../store/modules/appointmentForm';
-import { dateLine } from '../../utils/date';
+import successImage from '../../images/success.jpeg'
+import apologyImage from '../../images/apology.jpeg'
+import { AppointmentInfo } from '../appointmentInfo';
 
 import styles from './styles.module.scss';
 
@@ -20,7 +22,6 @@ export const SuccessPage = () => {
     const {
         startDateTime,
         time,
-        businessName,
         name,
         serviceName,
         duration,
@@ -32,29 +33,34 @@ export const SuccessPage = () => {
         <div className={styles.container}>
             <div className={styles.successHeader}>
                 {isAppointmentExisted
-                    ? <img src='/src/images/apology.jpeg' alt='apology'/>
-                    // ? <div className={`${styles.text} ${styles.apologyText}`}>
-                    //     <span>&#9888;</span>
-                    //     &nbsp;
-                    //     <p>Sorry, but you already have a confirmed appointment {name}.</p>
-                    // </div>
-                    : <img src='../../images/success.jpeg' alt='success'/>
-                    // : <div className={`${styles.text} ${styles.successText}`}>
-                    //     <span>&#10003;</span>
-                    //     &nbsp;
-                    //     <p>Your appointment has been confirmed {name}.</p>
-                    // </div>
+                    ? <div className={styles.text}>
+                        <img className={styles.image} src={apologyImage} alt='apology'/>
+                        <h4>Sorry, but you already have a confirmed appointment {name}.</h4>
+                    </div>
+                    : <div className={styles.text}>
+                        <img className={styles.image} src={successImage} alt='success'/>
+                        <h4>Your appointment has been confirmed {name}.</h4>
+                        <p>You will receive an email booking confirmation shortly</p>
+                    </div>
                 }
                 
             </div>
             <div className={styles.appointmentInfo}>
-                <p>{dateLine(startDateTime, time)}</p>
-                <p>{serviceName}, {duration} min - {resourceName}</p>
-                <p>Confirmation#: {confirmationNumber}</p>
+                <AppointmentInfo 
+                    resourceName={resourceName}
+                    serviceName={serviceName}
+                    duration={duration}
+                    startDateTime={startDateTime}
+                    time={time}
+                />
             </div>
-            {!isAppointmentExisted &&
-                <p className={styles.mailInfo}>You will receive an email booking confirmation shortly</p>
-            }
+            <hr />
+            <div className={styles.confirmationInfo}>
+                <div className={styles.row}>
+                    <div className={styles.columnFirst}>Confirmation#</div>
+                    <div className={styles.columnSecond}>{confirmationNumber}</div>
+                </div>
+            </div>
             <button onClick={handleReset} className={styles.homeButton}>
                 <Link to="/home">Home page</Link>
             </button>

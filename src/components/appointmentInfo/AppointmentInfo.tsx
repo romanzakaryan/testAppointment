@@ -1,18 +1,24 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
 import { dateLine } from '../../utils/date'
 
 import styles from './styles.module.scss';
 
-export const AppointmentInfo = () => {
+type Props = {
+    resourceName: string,
+    serviceName: string,
+    duration: number,
+    startDateTime: string,
+    time: number
+}
+
+export const AppointmentInfo: React.FC<Props> = (props) => {
     const {
         resourceName,
         serviceName,
         duration,
         startDateTime,
         time
-    } = useSelector((state: RootState) => state.app.appointmentForm.appointmentDate);
+    } = props;
 
     const appointmentInfoArray = [
         {
