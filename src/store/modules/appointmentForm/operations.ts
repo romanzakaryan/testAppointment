@@ -42,7 +42,7 @@ export const fetchAppointmentInfo = (time: string): AppThunk => async (dispatch,
         dispatch(sendAppointmentDate(response))
 
         return response;
-    } catch (err) {
+    } catch (err: any) {
         dispatch(setError({
             isError: true,
             text: err.toString(),
@@ -66,7 +66,7 @@ export const deleteAppointmentInfo = (): AppThunk => async (dispatch, getState) 
         dispatch(cancelAppointmentForm())
 
         return response;
-    } catch (err) {
+    } catch (err: any) {
         dispatch(setError({
             isError: true,
             text: err.toString(),
@@ -106,7 +106,7 @@ export const fetchFinalFormBooking = (payload: payloadBooking): AppThunk => asyn
         dispatch(showSuccessPage());
 
         
-    } catch (err) {
+    } catch (err: any) {
         dispatch(setError({
             isError: true,
             text: err.toString(),
