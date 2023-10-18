@@ -13,11 +13,8 @@ RUN npm install
 # Copy the rest of the app source code to the container
 COPY . .
 
-# Build the React app
+# Build the React app for production
 RUN npm run build
 
-# Expose a port if necessary
-# EXPOSE 80
-
-# Define the command to start your app
-CMD ["npm", "start"]
+# Serve the app using a lightweight web server
+CMD ["npx", "serve", "-s", "build"]

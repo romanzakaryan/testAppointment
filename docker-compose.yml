@@ -1,0 +1,9 @@
+version: '3'
+services:
+  react-app:
+    container_name: test-appointment-app
+    build:
+      context: . # Build context is the current directory
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"

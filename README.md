@@ -1,10 +1,32 @@
-Collectly Appointment Test
+# Collectly Appointment Test
 =================
 
-Runs the app in the development mode
+## Clone the project
+### Via SSH
+```sh
+git clone git@github.com:romanzakaryan/testAppointment.git
+```
+### Via HTTPS
+```sh
+git clone https://github.com/romanzakaryan/testAppointment.git
+```
+
+## Runs the app in the development mode
 1. Install packages
-### `npm i`
+```sh
+npm i
+```
 2. Start the app
-### `npm start`
+```sh
+npm start
+```
 3. Open it
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## For testing mode
+1. Move to project directory
+2. Run the app in docker compose
+```sh
+docker compose -f docker-compose.yml up -d
+```
+3. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
